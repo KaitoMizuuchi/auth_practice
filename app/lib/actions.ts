@@ -5,8 +5,8 @@ import { getUserByEmail } from "../db/user";
 import { signUpSchema } from "./schemas";
 import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
-import { signIn, signOut } from '@/auth';
 import { AuthError } from "next-auth";
+import { signIn, signOut } from "@/auth";
 
 export type SignUpState = {
   errors?: {
@@ -60,7 +60,7 @@ export async function login(prevState: string | undefined, formData: FormData) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return "Invalid credentials.";
+          return "ユーザーが存在しないか、パスワードが間違っています。";
         default:
           return "something went wrong."
       }
